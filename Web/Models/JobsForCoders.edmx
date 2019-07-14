@@ -1,0 +1,391 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="jobsforcodersModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="jobsforcodersModelStoreContainer">
+    <EntitySet Name="Entreprises" EntityType="jobsforcodersModel.Store.Entreprises" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Offres" EntityType="jobsforcodersModel.Store.Offres" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Candidats" EntityType="jobsforcodersModel.Store.Candidats" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="Applications" EntityType="jobsforcodersModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="CandidatEntreprise" EntityType="jobsforcodersModel.Store.CandidatEntreprise" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_JobPosting_Employer" Association="jobsforcodersModel.Store.FK_JobPosting_Employer">
+      <End Role="Employer" EntitySet="Entreprises" />
+      <End Role="JobPosting" EntitySet="Offres" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobID_ToTable" Association="jobsforcodersModel.Store.FK_JobID_ToTable">
+      <End Role="JobPosting" EntitySet="Offres" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_JobSeekerID_ToTable" Association="jobsforcodersModel.Store.FK_JobSeekerID_ToTable">
+      <End Role="JobSeeker" EntitySet="Candidats" />
+      <End Role="Application" EntitySet="Applications" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CandidatEntreprise_Candidat" Association="jobsforcodersModel.Store.FK_CandidatEntreprise_Candidat">
+      <End Role="Candidat" EntitySet="Candidats" />
+      <End Role="CandidatEntreprise" EntitySet="CandidatEntreprise" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CandidatEntreprise_Entreprise" Association="jobsforcodersModel.Store.FK_CandidatEntreprise_Entreprise">
+      <End Role="Entreprise" EntitySet="Entreprises" />
+      <End Role="CandidatEntreprise" EntitySet="CandidatEntreprise" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Entreprises">
+    <Key>
+      <PropertyRef Name="EntrepriseID" />
+    </Key>
+    <Property Name="EntrepriseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Cellphone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Website" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Logo" Type="nvarchar(max)" Nullable="true" />
+  </EntityType>
+  <EntityType Name="Offres">
+    <Key>
+      <PropertyRef Name="JobID" />
+    </Key>
+    <Property Name="JobID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EntrepriseID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Position" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Buzz_Words" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Salary" Type="float" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Candidats">
+    <Key>
+      <PropertyRef Name="JobSeekerID" />
+    </Key>
+    <Property Name="JobSeekerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Surname" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Birthdate" Type="datetime" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Education" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Objectives" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Introduction" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Links" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="50" />
+    <Property Name="Cellphone" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Buzz_Words" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Operator" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Photo1" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="CV" Type="nvarchar(max)" Nullable="true" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="City" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Applications">
+    <Key>
+      <PropertyRef Name="ApplicationID" />
+    </Key>
+    <Property Name="ApplicationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="JobID" Type="int" Nullable="false" />
+    <Property Name="JobSeekerID" Type="int" Nullable="false" />
+    <Property Name="Application_Date" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="CandidatEntreprise">
+    <Key>
+      <PropertyRef Name="Candidats_JobSeekerID" />
+      <PropertyRef Name="Entreprises_EntrepriseID" />
+    </Key>
+    <Property Name="Candidats_JobSeekerID" Type="int" Nullable="false" />
+    <Property Name="Entreprises_EntrepriseID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_JobPosting_Employer">
+    <End Role="Employer" Type="jobsforcodersModel.Store.Entreprises" Multiplicity="1" />
+    <End Role="JobPosting" Type="jobsforcodersModel.Store.Offres" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Employer">
+        <PropertyRef Name="EntrepriseID" />
+      </Principal>
+      <Dependent Role="JobPosting">
+        <PropertyRef Name="EntrepriseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobID_ToTable">
+    <End Role="JobPosting" Type="jobsforcodersModel.Store.Offres" Multiplicity="1" />
+    <End Role="Application" Type="jobsforcodersModel.Store.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobPosting">
+        <PropertyRef Name="JobID" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="JobID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_JobSeekerID_ToTable">
+    <End Role="JobSeeker" Type="jobsforcodersModel.Store.Candidats" Multiplicity="1" />
+    <End Role="Application" Type="jobsforcodersModel.Store.Applications" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="JobSeeker">
+        <PropertyRef Name="JobSeekerID" />
+      </Principal>
+      <Dependent Role="Application">
+        <PropertyRef Name="JobSeekerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CandidatEntreprise_Candidat">
+    <End Role="Candidat" Type="jobsforcodersModel.Store.Candidats" Multiplicity="1" />
+    <End Role="CandidatEntreprise" Type="jobsforcodersModel.Store.CandidatEntreprise" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Candidat">
+        <PropertyRef Name="JobSeekerID" />
+      </Principal>
+      <Dependent Role="CandidatEntreprise">
+        <PropertyRef Name="Candidats_JobSeekerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CandidatEntreprise_Entreprise">
+    <End Role="CandidatEntreprise" Type="jobsforcodersModel.Store.CandidatEntreprise" Multiplicity="*" />
+    <End Role="Entreprise" Type="jobsforcodersModel.Store.Entreprises" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Entreprise">
+        <PropertyRef Name="EntrepriseID" />
+      </Principal>
+      <Dependent Role="CandidatEntreprise">
+        <PropertyRef Name="Entreprises_EntrepriseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="jobsforcodersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Entreprise">
+          <Key>
+            <PropertyRef Name="EntrepriseID" />
+          </Key>
+          <Property Name="EntrepriseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="City" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Offres" Relationship="Self.FK_JobPosting_Employer" FromRole="Employer" ToRole="JobPosting" />
+          <Property Name="Cellphone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Website" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Logo" Type="String" MaxLength="Max" Unicode="true" FixedLength="false" Nullable="true" />
+          <NavigationProperty Name="Candidats" Relationship="jobsforcodersModel.CandidatEntreprise" FromRole="Entreprise" ToRole="Candidat" />
+        </EntityType>
+        <EntityType Name="Offre">
+          <Key>
+            <PropertyRef Name="JobID" />
+          </Key>
+          <Property Name="JobID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EntrepriseID" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Position" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Entreprise" Relationship="Self.FK_JobPosting_Employer" FromRole="JobPosting" ToRole="Employer" />
+          <Property Name="Buzz_Words" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Salary" Type="Double" Nullable="false" />
+          <NavigationProperty Name="Applications" Relationship="jobsforcodersModel.FK_JobID_ToTable" FromRole="JobPosting" ToRole="Application" />
+        </EntityType>
+        <EntityType Name="Candidat">
+          <Key>
+            <PropertyRef Name="JobSeekerID" />
+          </Key>
+          <Property Name="JobSeekerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Surname" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Birthdate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Education" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Objectives" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Introduction" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Links" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Cellphone" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Buzz_Words" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Operator" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="CV" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="true" />
+          <Property Name="Address" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Applications" Relationship="jobsforcodersModel.FK_JobSeekerID_ToTable" FromRole="JobSeeker" ToRole="Application" />
+          <NavigationProperty Name="Entreprises" Relationship="jobsforcodersModel.CandidatEntreprise" FromRole="Candidat" ToRole="Entreprise" />
+        </EntityType>
+        <Association Name="FK_JobPosting_Employer">
+          <End Role="Employer" Type="jobsforcodersModel.Entreprise" Multiplicity="1" />
+          <End Role="JobPosting" Type="jobsforcodersModel.Offre" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employer">
+              <PropertyRef Name="EntrepriseID" />
+            </Principal>
+            <Dependent Role="JobPosting">
+              <PropertyRef Name="EntrepriseID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="jobsforcodersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Entreprises" EntityType="jobsforcodersModel.Entreprise" />
+          <EntitySet Name="Offres" EntityType="jobsforcodersModel.Offre" />
+          <EntitySet Name="Candidats" EntityType="jobsforcodersModel.Candidat" />
+          <AssociationSet Name="FK_JobPosting_Employer" Association="Self.FK_JobPosting_Employer">
+            <End Role="Employer" EntitySet="Entreprises" />
+            <End Role="JobPosting" EntitySet="Offres" />
+          </AssociationSet>
+          <EntitySet Name="Applications" EntityType="jobsforcodersModel.Application" />
+          <AssociationSet Name="FK_JobID_ToTable" Association="jobsforcodersModel.FK_JobID_ToTable">
+            <End Role="JobPosting" EntitySet="Offres" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="FK_JobSeekerID_ToTable" Association="jobsforcodersModel.FK_JobSeekerID_ToTable">
+            <End Role="JobSeeker" EntitySet="Candidats" />
+            <End Role="Application" EntitySet="Applications" />
+          </AssociationSet>
+          <AssociationSet Name="CandidatEntreprise" Association="jobsforcodersModel.CandidatEntreprise">
+            <End Role="Candidat" EntitySet="Candidats" />
+            <End Role="Entreprise" EntitySet="Entreprises" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationID" />
+          </Key>
+          <Property Name="ApplicationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="JobID" Type="Int32" Nullable="false" />
+          <Property Name="JobSeekerID" Type="Int32" Nullable="false" />
+          <Property Name="Application_Date" Type="DateTime" Nullable="false" Precision="0" />
+          <NavigationProperty Name="Offre" Relationship="jobsforcodersModel.FK_JobID_ToTable" FromRole="Application" ToRole="JobPosting" />
+          <NavigationProperty Name="Candidat" Relationship="jobsforcodersModel.FK_JobSeekerID_ToTable" FromRole="Application" ToRole="JobSeeker" />
+        </EntityType>
+        <Association Name="FK_JobID_ToTable">
+          <End Type="jobsforcodersModel.Offre" Role="JobPosting" Multiplicity="1" />
+          <End Type="jobsforcodersModel.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobPosting">
+              <PropertyRef Name="JobID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="JobID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_JobSeekerID_ToTable">
+          <End Type="jobsforcodersModel.Candidat" Role="JobSeeker" Multiplicity="1" />
+          <End Type="jobsforcodersModel.Application" Role="Application" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="JobSeeker">
+              <PropertyRef Name="JobSeekerID" />
+            </Principal>
+            <Dependent Role="Application">
+              <PropertyRef Name="JobSeekerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CandidatEntreprise">
+          <End Type="jobsforcodersModel.Candidat" Role="Candidat" Multiplicity="*" />
+          <End Type="jobsforcodersModel.Entreprise" Role="Entreprise" Multiplicity="*" />
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="jobsforcodersModelStoreContainer" CdmEntityContainer="jobsforcodersEntities">
+    <EntitySetMapping Name="Entreprises">
+      <EntityTypeMapping TypeName="IsTypeOf(jobsforcodersModel.Entreprise)">
+        <MappingFragment StoreEntitySet="Entreprises">
+          <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+          <ScalarProperty Name="Website" ColumnName="Website" />
+          <ScalarProperty Name="Logo" ColumnName="Logo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Offres">
+      <EntityTypeMapping TypeName="IsTypeOf(jobsforcodersModel.Offre)">
+        <MappingFragment StoreEntitySet="Offres">
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="EntrepriseID" ColumnName="EntrepriseID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Buzz_Words" ColumnName="Buzz_Words" />
+          <ScalarProperty Name="Salary" ColumnName="Salary" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Candidats">
+      <EntityTypeMapping TypeName="IsTypeOf(jobsforcodersModel.Candidat)">
+        <MappingFragment StoreEntitySet="Candidats">
+          <ScalarProperty Name="JobSeekerID" ColumnName="JobSeekerID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Surname" ColumnName="Surname" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Education" ColumnName="Education" />
+          <ScalarProperty Name="Objectives" ColumnName="Objectives" />
+          <ScalarProperty Name="Introduction" ColumnName="Introduction" />
+          <ScalarProperty Name="Links" ColumnName="Links" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="Cellphone" ColumnName="Cellphone" />
+          <ScalarProperty Name="Buzz_Words" ColumnName="Buzz_Words" />
+          <ScalarProperty Name="Operator" ColumnName="Operator" />
+          <ScalarProperty Name="Photo1" ColumnName="Photo1" />
+          <ScalarProperty Name="CV" ColumnName="CV" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Applications">
+      <EntityTypeMapping TypeName="IsTypeOf(jobsforcodersModel.Application)">
+        <MappingFragment StoreEntitySet="Applications">
+          <ScalarProperty Name="ApplicationID" ColumnName="ApplicationID" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+          <ScalarProperty Name="JobSeekerID" ColumnName="JobSeekerID" />
+          <ScalarProperty Name="Application_Date" ColumnName="Application_Date" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="CandidatEntreprise" TypeName="jobsforcodersModel.CandidatEntreprise" StoreEntitySet="CandidatEntreprise">
+      <EndProperty Name="Candidat">
+        <ScalarProperty Name="JobSeekerID" ColumnName="Candidats_JobSeekerID" />
+      </EndProperty>
+      <EndProperty Name="Entreprise">
+        <ScalarProperty Name="EntrepriseID" ColumnName="Entreprises_EntrepriseID" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

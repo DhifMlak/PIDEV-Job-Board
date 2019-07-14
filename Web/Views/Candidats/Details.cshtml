@@ -1,0 +1,64 @@
+﻿@model JobsForCoders.Models.Candidat
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="container">
+    <div class="col-sm-8">
+        <div class="bs-calltoaction bs-calltoaction-default">
+            <div class="row">
+                <div class="col-md-1 cta-contents">
+                    <h1 class="cta-title"><img src="~/Uploads/@Html.DisplayFor(model => model.Photo1)" width="140" height="135"></h1>
+                    <div class="cta-desc">
+
+                        <a class="btn btn-primary btn-block" href="~/Uploads/@Html.DisplayFor(model => model.CV)" target="_blank">
+                            Download CV
+                        </a>
+                    </div>
+                </div>
+                <div class="col-md-7 cta-button">
+                    <h3>@Html.DisplayFor(model => model.Name) @Html.DisplayFor(model => model.Surname)</h3>
+                    <p><strong> Birthdate :</strong> @Html.DisplayFor(model => model.Birthdate)</p>
+                    <p><strong>Gender :</strong> @Html.DisplayFor(model => model.Gender)</p>
+                    <p><strong>Introduction :</strong> @Html.DisplayFor(model => model.Introduction) </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div class="bs-calltoaction bs-calltoaction-default">
+            <div class="row">
+                <div class="col-md-12 cta-contents">
+                    <h3 class="cta-title">
+                        Following
+                    </h3>
+                 </div>
+
+            </div>
+@foreach (var item in Model.Entreprises)
+{
+            <div class="row">
+                <div class="col-md-12 cta-contents">
+                    <div class="thumbnail">
+                        <img src="~/Uploads/@Html.DisplayFor(modelItem => item.Logo)" alt="advetiser logo">
+                        <a href="" class="feature-link"><h3>@Html.DisplayFor(modelItem => item.Name)</h3></a>
+                        <p>@Html.DisplayFor(modelItem => item.Website)</p>
+                        <div class="feature-btns"> @Html.ActionLink("Details", "Details", new { id = item.EntrepriseID }, new { @class = "btn btn-primary" })</div>
+                    </div>
+                </div>
+
+            </div>
+
+}
+
+
+        </div>
+    </div>
+</div>
+
+
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.JobSeekerID }) |
+</p>

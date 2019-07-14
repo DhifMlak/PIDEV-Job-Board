@@ -1,0 +1,263 @@
+﻿/*Home*/
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin: auto;
+    font-family: 'Gadugi', sans-serif;
+}
+
+.jumbotron {
+    background-color: #FF5722;
+    color: #fff;
+    text-align: center;
+    margin: 0px;
+    width: auto;
+    
+}
+
+.whatwhere{
+    margin-top: 40px;
+}
+
+
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+/*.dl-horizontal dt {
+    white-space: normal;
+}*/
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 600px;
+}
+.btn-login {
+    margin-top: 68px;
+}
+.btn.btn-default{
+    background-color: #ff5722;
+    color: #FFF;
+    border-color: #ff5722;
+}
+
+.btn.btn-default:hover{
+    background-color: #808080;
+    border-color:#808080;
+}
+
+.labelcolor{
+    color: #808080;
+}
+.copy{
+    margin-left: 30px;
+}
+/*End of Home*/
+
+/*Login*/
+
+.panel.panel-default {
+    margin-top: 5%;
+}
+.logintext {
+    text-align: center;
+    margin-top: 3%;
+}
+
+.btn-block{
+    background-color: #FF5722;
+    border-color: #FF5722;
+}
+
+.btn-block:hover{
+    background-color: #808080;
+    border-color:#808080;
+}
+
+.member{
+    text-align: center;
+}
+
+/*End of Login*/
+
+
+/*Employer Login*/
+
+/*End of Employer Login*/
+
+.img-small {
+    width: 70px!important;
+    height: 70px!important;
+}
+
+
+.featured-jobs {
+  padding: 70px 0px;
+  background: #f2f0f1;
+}
+.featured-jobs .thumbnail {
+  padding: 20px;
+}
+.featured-jobs .thumbnail img {
+  float: left;
+  margin: 0 10px 10px 0;
+}
+.featured-jobs .thumbnail .feature-link {
+  color: #77c7dc;
+}
+.featured-jobs .thumbnail .feature-link h3 {
+  padding-left: 10px;
+  margin: 0 0 6px;
+  font-size: 18px;
+}
+.featured-jobs .thumbnail .meta {
+  color: #f16060;
+  font-size: 11px;
+}
+.featured-jobs .thumbnail p {
+  font-size: 12px;
+  margin: 0 0 5px;
+}
+.featured-jobs .thumbnail .feature-btns {
+  position: absolute;
+  bottom: -13px;
+  left: 15px;
+}
+
+@media only screen and (max-width: 1024px) {
+
+.thumbnail { margin-bottom:50px; }
+
+.featured-jobs .thumbnail .feature-btns { bottom:17px; }
+
+
+    }
+
+@media only screen and (max-width: 790px) {
+
+.thumbnail { margin-bottom:50px; }
+
+.featured-jobs .thumbnail .feature-btns { bottom:-33px; }
+
+
+    }
+
+.bs-calltoaction{
+    position: relative;
+    width:auto;
+    padding: 15px 25px;
+    border: 1px solid black;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+    .bs-calltoaction > .row{
+        display:table;
+        width: calc(100% + 30px);
+    }
+     
+        .bs-calltoaction > .row > [class^="col-"],
+        .bs-calltoaction > .row > [class*=" col-"]{
+            float:none;
+            display:table-cell;
+            vertical-align:top;
+        }
+
+            .cta-contents{
+                padding-top: 10px;
+                padding-bottom: 10px;
+                border-right:1px solid #cacaca;
+            }
+            
+            .cta-title > img{
+                width:150px;
+                height:135px;
+                text-align:center;
+            }
+
+                .cta-title{
+                    margin: 0 auto;
+                    padding: 0;
+                }
+
+                .cta-desc{
+                    padding: 0;
+                    text-align:center;
+                    font-weight:bold;
+                }
+
+                .cta-desc p:last-child{
+                    margin-bottom: 0;
+                }
+
+            .cta-button{
+                padding-top: 10px;
+                padding-bottom: 10px;
+            }
+
+@media (max-width: 991px){
+    .bs-calltoaction > .row{
+        display:block;
+        width: auto;
+    }
+
+        .bs-calltoaction > .row > [class^="col-"],
+        .bs-calltoaction > .row > [class*=" col-"]{
+            float:none;
+            display:block;
+            position: relative;
+        }
+
+        .cta-contents{
+            text-align: center;
+        }
+}
+
+
+
+.bs-calltoaction.bs-calltoaction-default{
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc;
+}
+
+.bs-calltoaction.bs-calltoaction-primary{
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.bs-calltoaction.bs-calltoaction-info{
+    color: #fff;
+    background-color: #5bc0de;
+    border-color: #46b8da;
+}
+
+.bs-calltoaction.bs-calltoaction-success{
+    color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+
+.bs-calltoaction.bs-calltoaction-warning{
+    color: #fff;
+    background-color: #f0ad4e;
+    border-color: #eea236;
+}
+
+.bs-calltoaction.bs-calltoaction-danger{
+    color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+
+.bs-calltoaction.bs-calltoaction-primary .cta-button .btn,
+.bs-calltoaction.bs-calltoaction-info .cta-button .btn,
+.bs-calltoaction.bs-calltoaction-success .cta-button .btn,
+.bs-calltoaction.bs-calltoaction-warning .cta-button .btn,
+.bs-calltoaction.bs-calltoaction-danger .cta-button .btn{
+    border-color:#fff;
+}

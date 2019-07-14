@@ -1,0 +1,42 @@
+﻿@model IEnumerable<JobsForCoders.Models.Offre>
+
+@{
+    ViewBag.Title = "all";
+}
+
+
+<section class="featured-jobs">
+    <div class="container">
+        <div class="center-block"><h1>Offres</h1></div>
+        <div class="row">
+
+@foreach (var item in Model)
+{
+         
+            
+            <div class="col-sm-6 col-md-4">
+
+                <div class="thumbnail">
+                     <img src="~/Uploads/@Html.DisplayFor(modelItem => item.Employer.Logo)" alt="advetiser logo">
+                    <a href="" class="feature-link"><h3>@Html.DisplayFor(modelItem => item.Position)</h3></a>
+                    <p>@Html.DisplayFor(modelItem => item.Description)</p>
+                    <span class="meta">Posted by @Html.DisplayFor(modelItem => item.Employer.Name) - 12/12/2014</span>
+                    <div class="feature-btns"> @Html.ActionLink("Details", "Details", new { id = item.JobID },new { @class = "btn btn-primary" })</div>
+                </div>
+
+            </div>
+}
+            
+        </div>
+
+    </div>
+</section>
+
+
+
+
+
+
+
+
+             
